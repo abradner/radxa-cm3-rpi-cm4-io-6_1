@@ -8,7 +8,7 @@ jobs:
     - name: "Checkout"
       uses: "actions/checkout@v4"
     - name: "Build image"
-      uses: "RadxaOS-SDK/rsdk/.github/actions/build@main"
+      uses: "abradner/rsdk/.github/actions/build@main"
       with:
         edition: "${{ matrix.edition }}"
         github-token: "${{ secrets.GITHUB_TOKEN }}"
@@ -19,7 +19,7 @@ jobs:
       matrix:
         edition: "${{ fromJSON(needs.prepare_release.outputs.editions )}}"
         product:
-        - "radxa-cm5-rpi-cm4-io-6_1"
+        - "radxa-cm3-rpi-cm4-io"
         suite: "${{ fromJSON(needs.prepare_release.outputs.suites )}}"
   prepare_release:
     outputs:
@@ -33,12 +33,12 @@ jobs:
     - name: "Generate changelog"
       uses: "radxa-repo/rbuild-changelog@main"
       with:
-        product: "radxa-cm5-rpi-cm4-io-6_1"
+        product: "radxa-cm3-rpi-cm4-io"
     - id: "query"
       name: "Query product info"
-      uses: "RadxaOS-SDK/rsdk/.github/actions/query@main"
+      uses: "abradner/rsdk/.github/actions/query@main"
       with:
-        product: "radxa-cm5-rpi-cm4-io-6_1"
+        product: "radxa-cm3-rpi-cm4-io"
     - id: "release"
       name: "Create empty release"
       uses: "softprops/action-gh-release@v2"
